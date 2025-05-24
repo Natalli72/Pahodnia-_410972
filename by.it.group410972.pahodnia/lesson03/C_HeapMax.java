@@ -42,46 +42,35 @@ public class C_HeapMax {
         System.out.println("MAX=" + instance.findMaxValue(stream));
     }
 
+    //эта процедура читает данные из файла, ее можно не менять.
     Long findMaxValue(InputStream stream) {
         Long maxValue = 0L;
         MaxHeap heap = new MaxHeap();
+        //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(stream);
         Integer count = scanner.nextInt();
-        scanner.nextLine();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; ) {
             String s = scanner.nextLine();
             if (s.equalsIgnoreCase("extractMax")) {
                 Long res = heap.extractMax();
                 if (res != null && res > maxValue) maxValue = res;
-                System.out.println(res);
-            } else if (s.startsWith("Insert")) {
+                System.out.println();
+                i++;
+            }
+            if (s.contains(" ")) {
                 String[] p = s.split(" ");
-                heap.insert(Long.parseLong(p[1]));
+                if (p[0].equalsIgnoreCase("insert"))
+                    heap.insert(Long.parseLong(p[1]));
+                i++;
+                //System.out.println(heap); //debug
             }
         }
         return maxValue;
     }
 
     private class MaxHeap {
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         private List<Long> heap = new ArrayList<>();
-
-        int siftDown(int i) {
-            int left, right, largest = i;
-            while (true) {
-                left = 2 * i + 1;
-                right = 2 * i + 2;
-                if (left < heap.size() && heap.get(left) > heap.get(largest)) {
-                    largest = left;
-                }
-                if (right < heap.size() && heap.get(right) > heap.get(largest)) {
-                    largest = right;
-                }
-                if (largest == i) break;
-                swap(i, largest);
-                i = largest;
-            }
-            return i;
-        }
 
         int siftUp(int i) {
             while (i > 0) {
@@ -93,6 +82,27 @@ public class C_HeapMax {
             return i;
         }
 
+        int siftDown(int i) {
+            int size = heap.size();
+            while (i < size) {
+                int leftChild = 2 * i + 1;
+                int rightChild = 2 * i + 2;
+                int largest = i;
+
+                if (leftChild < size && heap.get(leftChild) > heap.get(largest)) {
+                    largest = leftChild;
+                }
+                if (rightChild < size && heap.get(rightChild) > heap.get(largest)) {
+                    largest = rightChild;
+                }
+                if (largest == i) break;
+
+                swap(i, largest);
+                i = largest;
+            }
+            return i;
+        }
+
         void insert(Long value) {
             heap.add(value);
             siftUp(heap.size() - 1);
@@ -100,10 +110,13 @@ public class C_HeapMax {
 
         Long extractMax() {
             if (heap.isEmpty()) return null;
-            long max = heap.get(0);
-            heap.set(0, heap.remove(heap.size() - 1));
-            if (!heap.isEmpty()) siftDown(0);
-            return max;
+            Long maxValue = heap.get(0);
+            Long lastValue = heap.remove(heap.size() - 1);
+            if (!heap.isEmpty()) {
+                heap.set(0, lastValue);
+                siftDown(0);
+            }
+            return maxValue;
         }
 
         private void swap(int i, int j) {
@@ -111,5 +124,11 @@ public class C_HeapMax {
             heap.set(i, heap.get(j));
             heap.set(j, temp);
         }
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
     }
+
+    // РЕМАРКА. Это задание исключительно учебное.
+    // Свои собственные кучи нужны довольно редко.
+    // В реальном приложении все иначе. Изучите и используйте коллекции
+    // TreeSet, TreeMap, PriorityQueue и т.д. с нужным CompareTo() для объекта внутри.
 }

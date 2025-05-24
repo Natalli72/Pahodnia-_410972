@@ -1,10 +1,10 @@
 package by.it.group410972.pahodnia.lesson03;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
 
 // Lesson 3. B_Huffman.
 // Восстановите строку по её коду и беспрефиксному коду символов.
@@ -42,7 +42,6 @@ import java.util.Scanner;
 //        Sample Output 2:
 //        abacabad
 
-
 public class B_Huffman {
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -54,31 +53,41 @@ public class B_Huffman {
 
     String decode(InputStream inputStream) throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
+        //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(inputStream);
-        int count = scanner.nextInt();
-        int length = scanner.nextInt();
-        scanner.nextLine(); // Пропустить перевод строки после чисел
+        Integer count = scanner.nextInt();
+        Integer length = scanner.nextInt();
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        scanner.nextLine(); // Пропускаем оставшуюся часть строки
 
-        // Словарь для хранения соответствия кодов символам
-        Map<String, Character> codeMap = new HashMap<>();
+        // Словарь для хранения символов и их кодов
+        Map<String, Character> codeToChar = new HashMap<>();
+
+        // Чтение кодов символов
         for (int i = 0; i < count; i++) {
             String line = scanner.nextLine();
             String[] parts = line.split(": ");
-            codeMap.put(parts[1], parts[0].charAt(0));
+            char letter = parts[0].charAt(0);
+            String code = parts[1];
+            codeToChar.put(code, letter);
         }
 
-        // Закодированная строка
+        // Чтение закодированной строки
         String encodedString = scanner.nextLine();
 
-        // Декодирование
+        // Декодирование строки
         StringBuilder currentCode = new StringBuilder();
         for (char c : encodedString.toCharArray()) {
             currentCode.append(c);
-            if (codeMap.containsKey(currentCode.toString())) {
-                result.append(codeMap.get(currentCode.toString()));
-                currentCode.setLength(0);
+            if (codeToChar.containsKey(currentCode.toString())) {
+                result.append(codeToChar.get(currentCode.toString()));
+                currentCode.setLength(0); // Очистка текущего кода
             }
         }
-        return result.toString();
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        return result.toString(); //01001100100111
     }
+
+
 }

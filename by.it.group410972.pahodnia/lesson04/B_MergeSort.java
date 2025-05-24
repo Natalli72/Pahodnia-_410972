@@ -16,13 +16,14 @@ Sample Input:
 Sample Output:
 2 2 3 9 9
 */
-
 public class B_MergeSort {
 
     public static void main(String[] args) throws FileNotFoundException {
         InputStream stream = B_MergeSort.class.getResourceAsStream("dataB.txt");
         B_MergeSort instance = new B_MergeSort();
+        //long startTime = System.currentTimeMillis();
         int[] result = instance.getMergeSort(stream);
+        //long finishTime = System.currentTimeMillis();
         for (int index : result) {
             System.out.print(index + " ");
         }
@@ -31,77 +32,79 @@ public class B_MergeSort {
     int[] getMergeSort(InputStream stream) throws FileNotFoundException {
         //подготовка к чтению данных
         Scanner scanner = new Scanner(stream);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
 
-        // размер массива
+        //размер массива
         int n = scanner.nextInt();
-        // сам массив
+        //сам массив
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-
-        // Реализация сортировки слиянием
+        // Выполняем сортировку слиянием
         mergeSort(a, 0, a.length - 1);
 
         return a;
     }
 
-    // Функция сортировки слиянием
-    void mergeSort(int[] arr, int left, int right) {
+    // Метод для рекурсивной сортировки слиянием
+    private void mergeSort(int[] array, int left, int right) {
         if (left < right) {
-            // Найдем середину массива
-            int mid = (left + right) / 2;
+            int middle = left + (right - left) / 2;
 
-            // Рекурсивно сортируем левую и правую части массива
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
+            // Сортируем левую половину
+            mergeSort(array, left, middle);
 
-            // Сливаем отсортированные части
-            merge(arr, left, mid, right);
+            // Сортируем правую половину
+            mergeSort(array, middle + 1, right);
+
+            // Сливаем две половины
+            merge(array, left, middle, right);
         }
     }
 
-    // Функция слияния двух отсортированных частей массива
-    void merge(int[] arr, int left, int mid, int right) {
-        // Размеры подмассивов
-        int n1 = mid - left + 1;
-        int n2 = right - mid;
+    // Метод для слияния двух отсортированных частей
+    private void merge(int[] array, int left, int middle, int right) {
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
 
-        // Временные массивы
-        int[] L = new int[n1];
-        int[] R = new int[n2];
+        int[] leftArray = new int[n1];
+        int[] rightArray = new int[n2];
 
-        // Копируем данные в временные массивы
-        System.arraycopy(arr, left, L, 0, n1);
-        System.arraycopy(arr, mid + 1, R, 0, n2);
+        // Копируем данные во временные массивы
+        for (int i = 0; i < n1; i++) {
+            leftArray[i] = array[left + i];
+        }
+        for (int i = 0; i < n2; i++) {
+            rightArray[i] = array[middle + 1 + i];
+        }
 
-        // Индексы для L, R и основного массива
-        int i = 0, j = 0, k = left;
+        // Сливаем временные массивы обратно в array
+        int i = 0, j = 0;
+        int k = left;
 
-        // Слияние
         while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
-                arr[k] = L[i];
-                i++;
+            if (leftArray[i] <= rightArray[j]) {
+                array[k++] = leftArray[i++];
             } else {
-                arr[k] = R[j];
-                j++;
+                array[k++] = rightArray[j++];
             }
-            k++;
         }
 
-        // Копируем оставшиеся элементы из L, если они есть
+        // Копируем оставшиеся элементы (если есть)
         while (i < n1) {
-            arr[k] = L[i];
-            i++;
-            k++;
+            array[k++] = leftArray[i++];
+        }
+        while (j < n2) {
+            array[k++] = rightArray[j++];
         }
 
-        // Копируем оставшиеся элементы из R, если они есть
-        while (j < n2) {
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
+        // тут ваше решение (реализуйте сортировку слиянием)
+        // https://ru.wikipedia.org/wiki/Сортировка_слиянием
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
     }
+
+
 }
