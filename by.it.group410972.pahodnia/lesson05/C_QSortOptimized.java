@@ -24,7 +24,7 @@ import static java.util.Arrays.binarySearch;
     1 6 11
     Sample Output:
     1 0 0
-*/
+
 
 
 public class C_QSortOptimized {

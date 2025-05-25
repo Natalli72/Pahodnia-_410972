@@ -36,7 +36,7 @@ import java.util.Scanner;
     + I (англ. insert) — вставить,
     ~ R (replace) — заменить,
     # M (match) — совпадение.
-*/
+
 
 
 public class C_EditDist {

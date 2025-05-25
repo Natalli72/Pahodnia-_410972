@@ -22,7 +22,7 @@ import java.util.Scanner;
     1 3 3 2 6
     Sample Output:
     3
-*/
+
 
 public class A_LIS {
 

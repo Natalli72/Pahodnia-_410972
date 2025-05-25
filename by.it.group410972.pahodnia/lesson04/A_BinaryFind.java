@@ -19,7 +19,7 @@ import java.util.Scanner;
         Sample Output:
         3 1 -1 1 -1
 (!) Обратите внимание на смещение начала индекса массивов JAVA относительно условий задачи
-*/
+
 
 public class A_BinaryFind {
     public static void main(String[] args) throws FileNotFoundException {

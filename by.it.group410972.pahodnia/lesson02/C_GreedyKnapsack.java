@@ -15,7 +15,7 @@ public class C_GreedyKnapsack {
 
     double calc(InputStream inputStream) throws FileNotFoundException {
         Scanner input = new Scanner(inputStream);
-        int n = input.nextInt();      // сколько предметов в файле
+        int n = input.nextInt();      // сколько предметов в
         int W = input.nextInt();      // какой вес у рюкзака
         Item[] items = new Item[n];   // список предметов
 

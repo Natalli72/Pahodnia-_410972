@@ -34,7 +34,7 @@ public class Lesson05Test {
         C_QSortOptimized instance = new C_QSortOptimized();
         int[] result = instance.getAccessory2(inputStream);
         boolean ok = Arrays.equals(result, new int[]{1, 0, 0});
-        assertTrue("C failed", ok);
+        assertTrue("Cfailed", ok);
     }
 
 }

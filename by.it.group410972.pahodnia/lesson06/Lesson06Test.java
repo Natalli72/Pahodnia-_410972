@@ -13,7 +13,7 @@ public class Lesson06Test {
         A_LIS instance = new A_LIS();
         int result = instance.getSeqSize(inputStream);
         boolean ok = (result == 3);
-        assertTrue("A failed", ok);
+        assertTrue("Afailed", ok);
     }
 
 
