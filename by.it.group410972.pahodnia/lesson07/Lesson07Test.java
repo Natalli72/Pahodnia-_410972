@@ -34,7 +34,6 @@ public class Lesson07Test {
         //ожидается     -s,~p,#,#,#,+s,
         assertEquals("C2 failed", instance.getDistanceEdinting("short","ports").split("#").length,4);
 
-        //ожидается     +e,#,#,-s,#,~i,#,-c,~g,
         assertEquals("C3 failed", instance.getDistanceEdinting("distance","editing").split("#").length,5);
     }
 
