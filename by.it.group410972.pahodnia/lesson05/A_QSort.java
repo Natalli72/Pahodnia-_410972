@@ -28,7 +28,7 @@ import java.util.*;
     1 6 11
     Sample Output:
     1 0 0
-
+*/
 
 
 public class A_QSort {

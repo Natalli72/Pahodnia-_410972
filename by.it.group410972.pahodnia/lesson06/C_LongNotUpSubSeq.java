@@ -25,7 +25,7 @@ import java.util.Scanner;
     Sample Output:
     4
     1 3 4 5
-
+*/
 
 
 public class C_LongNotUpSubSeq {

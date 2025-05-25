@@ -12,7 +12,7 @@ public class Lesson08Test {
         InputStream stream = A_Knapsack.class.getResourceAsStream("dataA.txt");
         A_Knapsack instance = new A_Knapsack();
         int res=instance.getMaxWeight(stream);
-        assertEquals("Afailed", res, 14);
+        assertEquals("A failed", res, 14);
     }
 
     @Test

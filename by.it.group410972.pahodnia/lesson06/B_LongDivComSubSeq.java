@@ -20,7 +20,7 @@ import java.util.Scanner;
     3 6 7 12
     Sample Output:
     3
-
+*/
 
 public class B_LongDivComSubSeq {
 

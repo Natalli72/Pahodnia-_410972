@@ -47,7 +47,7 @@ public class Lesson04Test {
     public void checkC() throws Exception {
         InputStream inputStream = C_GetInversions.class.getResourceAsStream("dataC.txt");
         C_GetInversions instance = new C_GetInversions();
-        // startTime = System.currentTimeMillis();
+        //long startTime = System.currentTimeMillis();
         int result = instance.calc(inputStream);
         //long finishTime = System.currentTimeMillis();
         boolean ok = (2 == result);

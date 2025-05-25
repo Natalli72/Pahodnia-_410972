@@ -8,7 +8,7 @@ import java.util.List;
  реализуйте метод calcStartTimes, так, чтобы число принятых к выполнению
  непересекающихся событий было максимально.
  Алгоритм жадный. Для реализации обдумайте надежный шаг.
-
+*/
 
 public class B_Sheduler {
     public static void main(String[] args) {
